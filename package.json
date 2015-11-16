@@ -27,5 +27,9 @@
     "supermodels.js": "0.0.7",
     "uglifyjs": "^2.4.10",
     "watchify": "3.6.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/davidjamesstone/brave.git"
   }
 }
