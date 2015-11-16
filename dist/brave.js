@@ -190,9 +190,16 @@ function renderer (currEl, component, ctx) {
   }
 }
 
+function initializer (component, ctx, el, data) {
+  return function () {
+    component.initialize.call(ctx, el, data)
+  }
+}
+
 function scan (el, data, parent) {
   var matches = getMatchingElements(el)
   var contexts = []
+  var initializers = []
   var currEl
 
   while (matches.length) {
@@ -213,7 +220,7 @@ function scan (el, data, parent) {
     contexts.push({ depth: depth, ctx: ctx })
 
     if (component.initialize) {
-      component.initialize.call(ctx, currEl, elData)
+      initializers.push(initializer(component, ctx, currEl, elData))
     }
 
     if (component.template) {
@@ -227,15 +234,20 @@ function scan (el, data, parent) {
     }
   }
 
-  for (var i = contexts.length - 1; i >= 0; i--) {
+  var i, j
+  for (i = contexts.length - 1; i >= 0; i--) {
     var aliasContext = contexts[i].ctx
     var aliasEl = aliasContext.__.el
     var aliases = aliasEl.querySelectorAll('[as]:not([as=""])')
-    for (var j = 0; j < aliases.length; j++) {
+    for (j = 0; j < aliases.length; j++) {
       var attr = aliases[j].getAttribute('as')
       aliasContext[attr] = aliases[j]
       aliases[j].removeAttribute('as')
     }
+  }
+
+  for (i = 0; i < initializers.length; i++) {
+    initializers[i]()
   }
 }
 
