@@ -4,21 +4,23 @@ Tiny web application library
 Super simple library that helps with building websites.
 
 Features:
-- Backbone-like Component defintions
-- jQuery-like like event delgation
+- Backbone-like component definitions
+- jQuery-like like event delegation
 - Angular-like scopes and controllers
 - Easy element referencing in controllers
 
 So, what does it do?
 
 - Allows you to define DOM components using javascript
-- DOM scopes for components are isolated by default but can inherit from their parent
+- DOM scopes for components that can be isolated or can `inherit` from their parent
 - Component level event delegation like jQuery `live`
 - Elements can be aliased onto their scope to avoid document.getElementById calls
 
 That's enough to start building quite some interesting applications. `brave`s main aim is to application structure by defining web component behaviors allowing you to take control of the DOM.
 
-`brave` is not a template library. How you generate HTML is down to you. It works by querying the DOM to look for attributes that match components you have registered. During this query it initializes any components it finds and attaches the behaviors such as events. If a component itself renders some more DOM while initializing, its' new children will then also be processed.
+No two-way binding, or automatic DOM updates are done, how you do this is down to you. There are plenty to options available if you want to use another library alongside or it can just be done the old fashioned way with `event`s. Manually handling DOM updates and managing state yourself can be a chore but there are lots of benefits over frameworks in the long run. Building models that represent the data on the front end, using a tools like `brave` to organize and build your controllers/scopes can yield a nice clean code base that's easy to reason about.
+
+`brave` is not a template library. How you generate HTML is down to you ([resigify](https://github.com/davidjamesstone/resigify) is used in the [Examples](examples)). It works by querying the DOM to look for attributes that match components you have registered. During this query it initializes any components it finds and attaches the behaviors such as events. If a component itself renders some more DOM while initializing, its' new children will then also be processed.
 
 Whilst this processing happens a scope chain of controllers is being built. This is a simple JS prototype chain and works in a similar fashion to AngularJS directives in that a components scope can be either isolated or `inherit` from their parent scope.
 
@@ -29,6 +31,8 @@ If you haven't used Angular before or any of this doesn't make sense don't worry
 `npm install brave --save`
 
 `var Brave = require('brave')`
+
+If you are'nt using `browserify` simply include `dist/brave.js` in a `script` tag and it will export `window.Brave`
 
 ## Components
 An object representing the component. Along with any other custom properties and functions, it can have the following properties:
@@ -110,6 +114,8 @@ DOM elements can be projected onto their scope by giving them an `as` attribute
 
 ## Example
 
+See the [Examples](examples)
+
 ```js
 
 Brave.register({
@@ -122,7 +128,7 @@ Brave.register({
     }
   },
   loginBox: {
-    
+
   }
 })
 
@@ -138,7 +144,7 @@ Brave.scan(document.body, data)
 
 ```html
 <div mywidget="foo">
-  <input as="searchEl" type="text">
+  <input as="searchText" type="search">
   <button as="searchButton" type="button">OK</button>
 </div>
 ```
