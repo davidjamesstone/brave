@@ -58,8 +58,8 @@ A function that will be called when the component is being initialized.
 A HTML string or function that returns a HTML string.
 The function will be passed the current `data`. The innerHTML of the element will be set and then `scan`ed.
 
-### `isolate` [boolean(true)]
-Components are isolated by default, set this to false and the scopes prototype will inherit from its parent.
+### `isolate` [boolean(false)]
+A Components' scopes' prototype will inherit from its' parent by default. Set this to `true` and the scope will be isolated.
 
 ## register
 Used to register a component or components.
