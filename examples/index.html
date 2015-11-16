@@ -11,45 +11,67 @@
     </div>
     <script src="../dist/brave.js"></script>
     <script>
-      Brave.register({
-        'my-app': {
-          initialize: function () {
-            this.headingEl.innerHTML = this.data.appName
-          }
+    Brave.register({
+      'my-app': {
+        initialize: function () {
+          this.headingEl.innerHTML = this.data.appName
         },
-        'my-login': {
-          'on': {
-            'submit:form': function (e) {
-              e.preventDefault()
-              this.login()
-            }
-          },
-          login: function () {
-            console.log('logging in...')
-          }
+        showMessage: function (message) {
+          alert(message)
         },
-        'my-widget': {
-          template: function () {
-            var str = '<ul>'
-            for (var i = 0; i < this.data.length; i++) {
-              str += '<li>' + this.data[i] + '</li>'
-            }
-            str += '</ul>'
-            return str
-          }
+        sayHi: function () {
+          this.showMessage('Hello from app')
+        },
+        get someProp () {
+          return 'I\'m on the the app\'s prototype'
         }
-      })
-
-      var data = {
-        appName: 'My App',
-        userData: {
-          userName: 'Jane',
-          password: 'secret'
+      },
+      'my-login': {
+        'on': {
+          'submit:form': function (e) {
+            e.preventDefault()
+            this.login()
+          }
         },
-        widgetData: [1, 2, 3]
+        login: function () {
+          this.showMessage('Logging in...')
+          this.showMessage('I can call my parent scope\'s methods and properties')
+        }
+      },
+      'my-widget': {
+        template: function () {
+          // This will be rendered when components are initialized.
+          // Notice how child components can be created e.g. `my-widget-item`
+          var str = '<ul>'
+          for (var i = 0; i < this.data.length; i++) {
+            str += '<li my-widget-item="[' + i + ']"></li>'
+          }
+          str += '</ul>'
+          return str
+        }
+      },
+      'my-widget-item': {
+        on: {
+          click: function (e) {
+            this.showMessage('Widget item clicked')
+          }
+        },
+        template: function () {
+          return '<li>' + this.data + '</li>'
+        }
       }
+    })
 
-      Brave.scan(document.body, data)
+    var data = {
+      appName: 'My App',
+      userData: {
+        userName: 'Jane',
+        password: 'secret'
+      },
+      widgetData: [1, 2, 3]
+    }
+
+    Brave.scan(document.body, data)
     </script>
   </body>
 </html>
