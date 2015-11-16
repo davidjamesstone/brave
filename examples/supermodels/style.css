@@ -1,0 +1,36 @@
+form div[errors] {
+  padding: 10px;
+}
+
+form div[errors] ul {
+  color: red;
+  background-color: yellow;
+  border: solid 1px red;
+}
+
+form label {
+  display: block;
+  margin-bottom: 10px;
+}
+
+form span.label-text {
+  width: 100px;
+  display: inline-block;
+}
+
+form span.indicator {
+  color: red
+}
+
+form button {
+  padding: 6px;
+  border: none;
+  color: white;
+  background-color: blue;
+}
+
+form button[disabled] {
+  color: black;
+  cursor: not-allowed;
+  background-color: lightgrey;
+}

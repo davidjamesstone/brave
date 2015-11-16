@@ -1,0 +1,30 @@
+{
+  "name": "brave",
+  "version": "0.0.1",
+  "description": "Old school web application library",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "bin/build",
+    "build:todo": "browserify examples/todo/index.js -t resigify -d -o examples/todo/todo.bundle.js",
+    "build:blog": "browserify examples/blog/index.js -t resigify -d -o examples/blog/blog.bundle.js",
+    "build:supermodels": "browserify examples/supermodels/index.js -t resigify -d -o examples/supermodels/supermodels.bundle.js",
+    "watch:todo": "watchify examples/todo/index.js -t resigify -d -o examples/todo/todo.bundle.js",
+    "watch:blog": "watchify examples/blog/index.js -t resigify -d -o examples/blog/blog.bundle.js",
+    "watch:supermodels": "watchify examples/supermodels/index.js -t resigify -d -o examples/supermodels/supermodels.bundle.js"
+  },
+  "author": "davidjamesstone",
+  "license": "ISC",
+  "dependencies": {
+    "dom-delegate": "2.0.3",
+    "get-object-path": "0.0.2"
+  },
+  "devDependencies": {
+    "browserify": "12.0.1",
+    "exorcist": "0.4.0",
+    "resigify": "1.0.0",
+    "supermodels.js": "0.0.7",
+    "uglifyjs": "^2.4.10",
+    "watchify": "3.6.0"
+  }
+}

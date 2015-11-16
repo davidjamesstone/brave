@@ -1,0 +1,7 @@
+rm -rf dist &&
+mkdir dist &&
+browserify index.js -o -d --standalone Brave | exorcist dist/brave.js.map > dist/brave.js -d &&
+uglifyjs dist/brave.js --screw-ie8 --mangle > dist/brave.min.js &&
+npm run build:todo &&
+npm run build:blog &&
+npm run build:supermodels

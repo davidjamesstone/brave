@@ -1,0 +1,5 @@
+<ul style="display: <%= obj.length ? '' : 'none' %>">
+  <% for (var i = 0; i < obj.length; i++) { %>
+    <li><a href="#<%= obj[i].key %>"><%= obj[i].error %></a></li>
+  <% } %>
+</ul>

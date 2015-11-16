@@ -1,0 +1,15 @@
+<table as="table">
+  <caption><%= data.name %></caption>
+  <tbody as="body">
+    <% for (var i = 0; i < todos.length; i++) { %>
+      <tr item="todos[<%= i %>]"></tr>
+    <% } %>
+  </tbody>
+  <tfoot>
+    <tr>
+      <td><input id="new-todo" as="newTodoText" type="text" value="<%= newTodo.text %>" placeholder="Add new todo"></td>
+      <td><button id="add-todo" as="addTodo" <%= isNewTodoValid ? '' : 'disabled' %>>Add new</button></td>
+      <td><button id="clear-todos" as="clearTodos" <%= hasCompleted ? '' : 'disabled' %>>Clear completed</button></td>
+    </tr>
+  </tfoot>
+</table>
