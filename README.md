@@ -123,12 +123,10 @@ Brave.register({
     initialize: function (e) { console.log('App initialize') },
     on: {
       'loggedin': function (e) {
+        // CustomEvent
         console.log('User logged in')
       }
     }
-  },
-  loginBox: {
-
   }
 })
 
@@ -143,7 +141,7 @@ Brave.scan(document.body, data)
 ```
 
 ```html
-<div mywidget="foo">
+<div app="foo">
   <input as="searchText" type="search">
   <button as="searchButton" type="button">OK</button>
 </div>
