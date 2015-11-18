@@ -27,11 +27,10 @@
         }
       },
       'my-login': {
-        isolate: true,
         initialize: function () {
           console.log('my-login')
         },
-        'on': {
+        on: {
           'submit:form': function (e) {
             e.preventDefault()
             this.login()

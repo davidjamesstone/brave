@@ -22,12 +22,12 @@ So, what does it do?
 ```html
 <div my-app>
   <h1 as="headingEl"></h1>
-  <form my-login="userData">
+  <form my-login="userData" as="formEl">
     <input type="text">
     <input type="password">
-    <button>Login</button>
+    <button as="buttonEl">Login</button>
   </form>
-  <div my-widget="widgetData"></div>
+  <div my-widget="widgetData" as="widgetEl"></div>
 </div>
 ```
 
@@ -48,7 +48,10 @@ Brave.register({
     }
   },
   'my-login': {
-    'on': {
+    initialize: function () {
+      console.log('my-login')
+    },
+    on: {
       'submit:form': function (e) {
         e.preventDefault()
         this.login()
@@ -60,25 +63,31 @@ Brave.register({
     }
   },
   'my-widget': {
+    initialize: function () {
+      console.log('my-widget')
+    },
     template: function () {
       // This will be rendered when components are initialized.
       // Notice how child components can be created e.g. `my-widget-item`
       var str = '<ul>'
       for (var i = 0; i < this.data.length; i++) {
-        str += '<li my-widget-item="[' + i + ']"></li>'
+        str += '<li my-widget-item="[' + i + ']" as="listItem_' + i + '"></li>'
       }
       str += '</ul>'
       return str
     }
   },
   'my-widget-item': {
+    initialize: function () {
+      console.log('my-widget-item')
+    },
     on: {
       click: function (e) {
         this.showMessage('Widget item clicked')
       }
     },
     template: function () {
-      return '<li>' + this.data + '</li>'
+      return '<a as="item_' + this.data +'" href="#">' + this.data + '</a>'
     }
   }
 })
