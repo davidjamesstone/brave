@@ -55,6 +55,7 @@ var list = {
         this.body.rows[i].remove()
       }
     }
+    this.setClearButtonState()
   },
   on: {
     'input:input#new-todo': function (e) {
@@ -121,11 +122,6 @@ Dom.register({
   }
 })
 
-function Login (data) {
-  this.email = data.email
-  this.password = data.password
-}
-
 window.onload = function () {
   var app = {
     id: 1,
@@ -133,7 +129,7 @@ window.onload = function () {
     menu: [{ text: 'Home', url: '/home' }, { text: 'About', url: '/about' }],
     newTodo: { text: '', completed: false },
     todos: [{text: 'A', completed: false}, {text: 'B', completed: true}, {text: 'C', completed: false}],
-    login: new Login({email: 'hey', password: 'secret'})
+    login: {email: 'hey', password: 'secret'}
   }
 
   Dom.scan(document.documentElement, app)

@@ -143,12 +143,12 @@ The function will be passed the current `scope`. The innerHTML of the element wi
 ### `isolate` [boolean(false)]
 A Component's scope prototype will inherit from its parent by default. Set this to `true` and the scope will be isolated.
 
-
+## Scopes
 When a component is initialized a scope is created. That scope will contain on its prototype the custom properties of the component object and any `inherited` properties (unless it's isolated). A scope will also contain these properties:
 
 - `data` - The data object passed in the call to `scan`
 - `render` - Can be used for re-rendering. Only present if a `template` was defined on the component
-- `__` - This property holds the component information (`isolated`, `on`) etc. Could be useful if you need to reference the component thaty was used to create the scope.
+- `__` - This property holds the component information (`isolated`, `on`) etc. Could be useful if you need to reference the component that was used to create the scope.
 
 ## register
 Used to register a component or components.
@@ -173,7 +173,7 @@ Query the DOM for components and initializes them.
 `Brave.scan(el, [data])`
 
 Elements are queried for attributes names matching component name.
-The value of the attribute can make a reference `data`. E.g.
+The value of the attribute can make a reference `data`. E.g. `foo` here:
 
 ```html
 <div mywidget="foo"></div>
@@ -203,36 +203,6 @@ DOM elements can be projected onto their scope by giving them an `as` attribute
 ## Example
 
 See the [Examples](examples)
-
-```js
-
-Brave.register({
-  app: {
-    initialize: function (e) { console.log('App initialize') },
-    on: {
-      'loggedin': function (e) {
-        console.log('User logged in')
-      }
-    }
-  }
-})
-
-var data = {
-  foo: {
-    bar: 1,
-    baz: 2
-  }
-}
-
-Brave.scan(document.body, data)
-```
-
-```html
-<div app="foo">
-  <input as="searchText" type="search">
-  <button as="searchButton" type="button">OK</button>
-</div>
-```
 
 ## Notes
 A similar technique was used by Paul Irish who coined the name [DOM based routing](http://www.paulirish.com/2009/markup-based-unobtrusive-comprehensive-dom-ready-execution/)

@@ -43,7 +43,7 @@ Dom.register({
     initialize: function () {
       var self = this
       this.data.on('change', function () {
-        self.__.render()
+        self.render()
       })
     },
     template: function (model) {
@@ -54,7 +54,7 @@ Dom.register({
     initialize: function () {
       var self = this
       this.data.on('change', function (e) {
-        self.__.render()
+        self.render()
       })
     },
     template: function () {
