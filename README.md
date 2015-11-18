@@ -104,7 +104,7 @@ var data = {
 Brave.scan(document.body, data)
 ```
 
-Here's the [result](https://jsfiddle.net/zpufwck1/) of this example
+Here's the [result](https://jsfiddle.net/zpufwck1/1/) of this example
 
 
 It's enough to start building quite some interesting applications. `brave`s main aim is to application structure by defining web component behaviors allowing you to take control of the DOM.
