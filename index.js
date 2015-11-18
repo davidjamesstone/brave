@@ -24,12 +24,6 @@ function createContext (el, data, component, parent) {
   var ctx = Object.create(component.isolate ? {} : parent || {})
 
   var info = Object.create({}, {
-    el: {
-      value: el
-    },
-    data: {
-      value: data
-    },
     component: {
       value: component
     }
@@ -38,6 +32,9 @@ function createContext (el, data, component, parent) {
   Object.defineProperties(ctx, {
     __: {
       value: info
+    },
+    el: {
+      value: el
     }
   })
 
@@ -149,7 +146,7 @@ function findParentContext (el, contexts) {
     el = el.parentNode
     if (el) {
       for (var i = contexts.length - 1; i > -1 ; i--) {
-        if (contexts[i].ctx.__.el === el) {
+        if (contexts[i].ctx.el === el) {
           return contexts[i].ctx
         }
       }
@@ -204,7 +201,7 @@ function scan (el, data, parent, childrenOnly) {
   var processed = []
   for (i = contexts.length - 1; i >= 0; i--) {
     var aliasContext = contexts[i].ctx
-    var aliasEl = aliasContext.__.el
+    var aliasEl = aliasContext.el
     var aliases = aliasEl.querySelectorAll('[as]:not([as=""])')
     for (j = 0; j < aliases.length; j++) {
       if (processed.indexOf(aliases[j]) < 0) {
@@ -223,7 +220,7 @@ function scan (el, data, parent, childrenOnly) {
 
   for (i = 0; i < contexts.length; i++) {
     if (contexts[i].template) {
-      var render = renderer(contexts[i].ctx.__.el, contexts[i].component, contexts[i].ctx)
+      var render = renderer(contexts[i].ctx.el, contexts[i].component, contexts[i].ctx)
       render()
       contexts[i].ctx.render = render
     }
