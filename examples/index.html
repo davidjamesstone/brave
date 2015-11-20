@@ -2,10 +2,10 @@
   <body>
     <div my-app>
       <h1 as="headingEl"></h1>
-      <form my-login="userData" as="formEl">
-        <input type="text">
-        <input type="password">
-        <button as="buttonEl">Login</button>
+      <form my-login="userData" as="formEl" onsubmit="submit(e)">
+        <input type="text" onchange="data.userName = this.value">
+        <input type="password" onchange="data.password = this.value">
+        <button as="buttonEl" onclick="showMessage('About to login')">Login</button>
       </form>
       <div my-widget="widgetData" as="widgetEl"></div>
     </div>
@@ -30,14 +30,17 @@
         initialize: function () {
           console.log('my-login')
         },
-        on: {
-          'submit:form': function (e) {
-            e.preventDefault()
-            this.login()
-          }
+        submit: function (e) {
+          this.showMessage(this.someProp)
         },
+        // on: {
+        //   'submit:form': function (e) {
+        //     e.preventDefault()
+        //     this.login()
+        //   }
+        // },
         login: function () {
-          this.showMessage('Logging in...')
+          this.showMessage('Logging in...' + this.data.userName + ' ' + this.data.password)
           this.showMessage('I can call my parent scope\'s methods and properties')
         }
       },
@@ -60,13 +63,13 @@
         initialize: function () {
           console.log('my-widget-item')
         },
-        on: {
-          click: function (e) {
-            this.showMessage('Widget item clicked')
-          }
-        },
+        // on: {
+        //   click: function (e) {
+        //     this.showMessage('Widget item clicked')
+        //   }
+        // },
         template: function () {
-          return '<a as="item_' + this.data +'" href="#">' + this.data + '</a>'
+          return '<a as="item_' + this.data +'" href="#" onclick="showMessage(\'Widget item clicked\')">' + this.data + '</a>'
         }
       }
     })
